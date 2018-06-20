@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import { Row, Col, Button, List, Spin, Card } from 'antd';
 import IconPlus from 'react-icons/lib/fa/plus';
+import EditableTable from '../EditableTable';
 import './style.less';
 
 class CatalogList extends Component {
@@ -13,6 +14,8 @@ class CatalogList extends Component {
             isFetching: true,
             data: [],
         },
+        onAddProduct: () => {},
+        onEditProduct: () => {},
     };
     static propTypes = {
         catalogList: PropTypes.shape({
@@ -22,8 +25,11 @@ class CatalogList extends Component {
             data: PropTypes.arrayOf(PropTypes.shape({
                 id: PropTypes.string,
                 name: PropTypes.string,
+                data: PropTypes.array,
             })),
         }),
+        onAddProduct: PropTypes.func,
+        onEditProduct: PropTypes.func,
     };
 
     renderList = () => {
@@ -31,7 +37,7 @@ class CatalogList extends Component {
 
         return (
             <List
-                grid={{ gutter: 16, sm: 2, md: 4 }}
+                grid={{ gutter: 16, sm: 1, md: 2 }}
                 dataSource={data}
                 renderItem={this.renderListItem}
             />
@@ -39,6 +45,8 @@ class CatalogList extends Component {
     };
 
     renderListItem = (item) => {
+        const { onAddProduct, onEditProduct } = this.props;
+
         // return (
         //     <List.Item onClick={this.handleClick}>
         //         {item.name}
@@ -47,7 +55,13 @@ class CatalogList extends Component {
 
         return (
             <List.Item>
-                <Card title={item.name}>Card content</Card>
+                <Card title={item.name}>
+                    <EditableTable
+                        catalog={item}
+                        onAddProduct={onAddProduct}
+                        onEditProduct={onEditProduct}
+                    />
+                </Card>
             </List.Item>
         );
     };

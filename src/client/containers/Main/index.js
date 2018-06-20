@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import Main from '../../components/Main';
-import { getCatalogList } from '../../redux/actions/CatalogListActions';
-import { getCatalog } from '../../redux/actions/CatalogActions';
+import { getCatalogList, addProduct, editProduct } from '../../redux/actions/CatalogListActions';
+// import { getCatalog } from '../../redux/actions/CatalogActions';
 
 class MainContainer extends Component {
     static defaultProps = {
@@ -15,14 +15,15 @@ class MainContainer extends Component {
             isFetching: true,
             data: [],
         },
-        CatalogStore: {
-            error: null,
-            fetched: false,
-            isFetching: true,
-            data: [],
-        },
+        // CatalogStore: {
+        //     error: null,
+        //     fetched: false,
+        //     isFetching: true,
+        //     data: [],
+        // },
         getCatalogList: () => {},
-        getCatalog: () => {},
+        editProduct: () => {},
+        addProduct: () => {},
     };
     static propTypes = {
         CatalogListStore: PropTypes.shape({
@@ -34,17 +35,18 @@ class MainContainer extends Component {
                 name: PropTypes.string,
             })),
         }),
-        CatalogStore: PropTypes.shape({
-            error: PropTypes.any,
-            fetched: PropTypes.bool,
-            isFetching: PropTypes.bool,
-            data: PropTypes.arrayOf(PropTypes.shape({
-                item: PropTypes.string,
-                cost: PropTypes.number,
-            })),
-        }),
+        // CatalogStore: PropTypes.shape({
+        //     error: PropTypes.any,
+        //     fetched: PropTypes.bool,
+        //     isFetching: PropTypes.bool,
+        //     data: PropTypes.arrayOf(PropTypes.shape({
+        //         item: PropTypes.string,
+        //         cost: PropTypes.number,
+        //     })),
+        // }),
         getCatalogList: PropTypes.func,
-        getCatalog: PropTypes.func,
+        editProduct: PropTypes.func,
+        addProduct: PropTypes.func,
     };
 
     componentDidMount() {
@@ -60,10 +62,15 @@ class MainContainer extends Component {
     // };
 
     render() {
-        const { CatalogListStore, CatalogStore } = this.props;
+        const { CatalogListStore, editProduct, addProduct } = this.props;
 
         return (
-            <Main catalogList={CatalogListStore} CatalogStore={CatalogStore} />
+            <Main
+                catalogList={CatalogListStore}
+                // CatalogStore={CatalogStore}
+                onAddProduct={addProduct}
+                onEditProduct={editProduct}
+            />
         );
     }
 }
@@ -71,7 +78,7 @@ class MainContainer extends Component {
 export default connect(
     store => ({
         CatalogListStore: store.CatalogListStore,
-        CatalogStore: store.CatalogStore,
+        // CatalogStore: store.CatalogStore,
     }),
-    dispatch => (bindActionCreators({ getCatalogList, getCatalog }, dispatch)),
+    dispatch => (bindActionCreators({ getCatalogList, addProduct, editProduct }, dispatch)),
 )(MainContainer);

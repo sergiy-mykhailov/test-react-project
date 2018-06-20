@@ -8,6 +8,9 @@ export const CATALOG_LIST_FETCHING = 'CATALOG_LIST.fetching';
 export const CATALOG_LIST_ERROR = 'CATALOG_LIST.error';
 export const CATALOG_LIST_CLEAR = 'CATALOG_LIST.clear';
 
+export const PRODUCT_CREATE = 'PRODUCT.create';
+export const PRODUCT_UPDATE = 'PRODUCT.update';
+
 export function getCatalogList(url = API.CATALOG_LIST, query = null) {
     return (dispatch) => {
         dispatch({ type: CATALOG_LIST_FETCHING });
@@ -26,5 +29,17 @@ export function getCatalogList(url = API.CATALOG_LIST, query = null) {
         };
 
         return api.get(url, query).then(onSuccess).catch(onError);
+    };
+}
+
+export function addProduct(catalogId, product) {
+    return (dispatch) => {
+        dispatch({ type: PRODUCT_CREATE, catalogId, product});
+    };
+}
+
+export function editProduct(catalogId, key, columnName, value) {
+    return (dispatch) => {
+        dispatch({ type: PRODUCT_UPDATE, catalogId, key, columnName, value});
     };
 }

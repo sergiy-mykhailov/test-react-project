@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'antd';
 import CatalogList from '../CatalogList';
-import Catalog from '../Catalog';
+// import Catalog from '../Catalog';
 import PropTypes from "prop-types";
 
 class Main extends Component {
@@ -13,6 +13,8 @@ class Main extends Component {
             isFetching: true,
             data: [],
         },
+        onAddProduct: () => {},
+        onEditProduct: () => {},
     };
     static propTypes = {
         catalogList: PropTypes.shape({
@@ -24,16 +26,22 @@ class Main extends Component {
                 name: PropTypes.string,
             })),
         }),
+        onAddProduct: PropTypes.func,
+        onEditProduct: PropTypes.func,
     };
 
     render() {
-        const { catalogList, catalog, onCatalogSelect } = this.props;
+        const { catalogList, onEditProduct, onAddProduct } = this.props;
 
         return (
             <div>
                 <Row>
                     <Col span={24}>
-                        <CatalogList catalogList={catalogList}/>
+                        <CatalogList
+                            catalogList={catalogList}
+                            onAddProduct={onAddProduct}
+                            onEditProduct={onEditProduct}
+                        />
                     </Col>
                     {/*<Col span={18}>*/}
                         {/*<Catalog catalog={catalog} />*/}

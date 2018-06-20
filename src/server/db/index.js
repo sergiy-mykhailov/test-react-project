@@ -24,17 +24,19 @@ export function getCatalogList() {
 
             const data = [
                 {
+                    id: '1',
                     name: 'Fruits',
                     data: [
-                        { item: 'Apples', cost: 20 },
-                        { item: 'Oranges', cost: 30 },
+                        { key: 0, item: 'Apples', cost: 20 },
+                        { key: 1, item: 'Oranges', cost: 30 },
                     ],
                 },
                 {
+                    id: '2',
                     name: 'Vegetables',
                     data: [
-                        { item: 'Tomatoes', cost: 24 },
-                        { item: 'Cucumbers', cost: 16 },
+                        { key: 0, item: 'Tomatoes', cost: 24 },
+                        { key: 1, item: 'Cucumbers', cost: 16 },
                     ],
                 },
             ];
