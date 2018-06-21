@@ -1,7 +1,7 @@
 
 export default {
-    error: null,
-    fetched: false,
-    isFetching: false,
-    data: [],
+  error: null,
+  fetched: false,
+  isFetching: false,
+  data: [],
 };

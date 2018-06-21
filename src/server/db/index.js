@@ -1,49 +1,47 @@
 
 import mongoose from 'mongoose';
-// import '../models/Note.js';
+// import CatalogModel from '../models/Catalog';
 import { DB } from '../constants';
 
-// const Note = mongoose.model('Note');
+// const Catalog = mongoose.model('Catalog');
 
 mongoose.Promise = global.Promise;
 
 export function setUpConnection() {
-    return mongoose.connect(
-        `mongodb://${DB.host}:${DB.port}/${DB.name}`,
-        {
-            useMongoClient: true,
-            /* other options */
-        }
-    );
+  return mongoose.connect(
+    `mongodb://${DB.host}:${DB.port}/${DB.name}`,
+    {
+      useMongoClient: true,
+      /* other options */
+    },
+  );
 }
 
 export function getCatalogList() {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            console.log('db - getCatalogList');
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const data = [
+        {
+          id: '1',
+          name: 'Fruits',
+          data: [
+            { key: '0', item: 'Apples', cost: 20 },
+            { key: '1', item: 'Oranges', cost: 30 },
+          ],
+        },
+        {
+          id: '2',
+          name: 'Vegetables',
+          data: [
+            { key: '0', item: 'Tomatoes', cost: 24 },
+            { key: '1', item: 'Cucumbers', cost: 16 },
+          ],
+        },
+      ];
 
-            const data = [
-                {
-                    id: '1',
-                    name: 'Fruits',
-                    data: [
-                        { key: 0, item: 'Apples', cost: 20 },
-                        { key: 1, item: 'Oranges', cost: 30 },
-                    ],
-                },
-                {
-                    id: '2',
-                    name: 'Vegetables',
-                    data: [
-                        { key: 0, item: 'Tomatoes', cost: 24 },
-                        { key: 1, item: 'Cucumbers', cost: 16 },
-                    ],
-                },
-            ];
-
-            resolve(data);
-        }, 200);
-    });
+      resolve(data);
+    }, 200);
+  });
 }
 
 // export function getCatalogList() {

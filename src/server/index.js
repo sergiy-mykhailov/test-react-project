@@ -1,5 +1,5 @@
 
-import { URLSearchParams } from 'url';
+// import { URLSearchParams } from 'url';
 import express from 'express';
 import http from 'http';
 import cors from 'cors';
@@ -30,7 +30,7 @@ app.use(express.static('build'));
 
 // CORS
 if (CORS && CORS.enabled) {
-    app.use(cors(CORS));
+  app.use(cors(CORS));
 }
 
 app.use('/api', api);
@@ -38,27 +38,27 @@ app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-    const err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+  const err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use((err, req, res, next) => {
-        console.error('err', err);
-        res.status(err.status || 500);
-        res.json(err);
-    });
+  app.use((err, req, res, next) => {
+    console.error('err', err);
+    res.status(err.status || 500);
+    res.json(err);
+  });
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use((err, req, res, next) => {
-    console.error('err', err);
-    res.status(err.status || 500);
-    res.json(err);
+  console.error('err', err);
+  res.status(err.status || 500);
+  res.json(err);
 });
 
 // Get port from environment and store in Express.
@@ -75,52 +75,52 @@ server.on('listening', onListening);
 
 // Normalize a port into a number, string, or false.
 function normalizePort(val) {
-    const normPort = parseInt(val, 10);
+  const normPort = parseInt(val, 10);
 
-    if (isNaN(normPort)) {
-        // named pipe
-        return val;
-    }
+  if (isNaN(normPort)) {
+    // named pipe
+    return val;
+  }
 
-    if (normPort >= 0) {
-        // port number
-        return normPort;
-    }
+  if (normPort >= 0) {
+    // port number
+    return normPort;
+  }
 
-    return false;
+  return false;
 }
 
 // Event listener for HTTP server "error" event.
 function onError(error) {
-    if (error.syscall !== 'listen') {
-        throw error;
-    }
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
 
-    const bind = typeof port === 'string'
-        ? `Pipe ${port}`
-        : `Port ${port}`;
+  const bind = typeof port === 'string'
+    ? `Pipe ${port}`
+    : `Port ${port}`;
 
-    // handle specific listen errors with friendly messages
-    switch (error.code) {
-        case 'EACCES':
-            console.error(`${bind} requires elevated privileges`);
-            process.exit(1);
-            break;
-        case 'EADDRINUSE':
-            console.error(`${bind} is already in use`);
-            process.exit(1);
-            break;
-        default:
-            throw error;
-    }
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(`${bind} requires elevated privileges`);
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(`${bind} is already in use`);
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
 }
 
 // Event listener for HTTP server "listening" event.
 function onListening() {
-    const addr = server.address();
-    const bind = typeof addr === 'string'
-        ? `pipe ${addr}`
-        : `port ${addr.port}`;
+  const addr = server.address();
+  const bind = typeof addr === 'string'
+    ? `pipe ${addr}`
+    : `port ${addr.port}`;
 
-    console.info(`Server listening on ${bind}`);
+  console.info(`Server listening on ${bind}`);
 }
